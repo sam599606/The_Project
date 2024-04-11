@@ -7,6 +7,7 @@ using The_Project.Data;
 using System.Text;
 using The_Project.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace The_Project.Services
 {
@@ -125,6 +126,11 @@ namespace The_Project.Services
             string Role = "User";
             // 取得傳入帳號的會員資料
             var LoginMember = _context.Members.FirstOrDefault(m => m.Account == account);
+
+            if(LoginMember == null)
+            {
+                return "";
+            }
 
             if (LoginMember.Role == 2)
             {
